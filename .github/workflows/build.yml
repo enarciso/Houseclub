@@ -1,28 +1,27 @@
-name: Build & Publish Release APK
+name: Build & Publish Debug APK
 
 on:
  push:
-   branches:
-     - master
+  branches:
+   - master
    
 jobs:
   build:
     runs-on: ubuntu-20.04
     steps:
-    - name: checkout code
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v1
     - name: set up JDK 1.8
       uses: actions/setup-java@v1
       with:
-        java-version: 11
+        java-version: 1.8
     - name: Make Gradle executable
       run: chmod +x ./gradlew
-    - name: Build Release APK
+    - name: Build with Gradle
+      run: ./gradlew build
+    - name: Build Debug APK
       run: ./gradlew assembleRelease
-    - name: Downloading entrypoint.sh script
-      run: wget https://raw.githubusercontent.com/alimirrajei/Houseclub/master/.github/workflows/entrypoint.sh
-    - name: Executing check_for_playstore_releases.sh script
-      run: bash entrypoint.sh
+    - name: Releasing using Hub
+      uses: ShaunLWM/action-release-debugapk@master
       env:
        GITHUB_TOKEN: ${{ secrets.TOKEN }}
        APP_FOLDER: Houseclub
