@@ -7,7 +7,7 @@ android {
         applicationId "unofficial.clubhouse.android"
         minSdkVersion 24
         versionCode 10
-        versionName "1.0.9"
+        versionName "1.0.10"
         resConfig "en"
         vectorDrawables.useSupportLibrary = true
     }
@@ -26,6 +26,7 @@ android {
     }
     lintOptions {
         disable 'MissingTranslation'
+        abortOnError false
     }
 }
 

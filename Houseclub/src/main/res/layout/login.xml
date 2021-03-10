@@ -59,46 +59,66 @@
             android:inputType="number"
             android:textColorHint="@color/hint" />
 
-        <LinearLayout
-            android:id="@+id/resend_code_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:gravity="center"
-            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="8dp"
-                android:text="@string/resend_code_message"
-                android:textColor="@color/text_gray" />
+		<TextView
+			android:id="@+id/show_resend_code_option"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_horizontal"
+			android:layout_marginTop="4dp"
+			android:layout_marginBottom="8dp"
+			android:text="@string/resend_code_message"
+			android:textColor="@color/text_gray" />
 
-            <Button
-                android:id="@+id/resend_code"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:background="@null"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:padding="4dp"
-                android:text="@string/resend_code_button"
-                android:textAllCaps="false"
-                android:textColor="@color/text_gray"
-                android:textStyle="normal" />
 
-        </LinearLayout>
+		<LinearLayout
+			android:id="@+id/resend_code_layout"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="12dp"
+			android:gravity="center"
+			android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="48dp"
-            android:text="@string/next" />
 
-    </LinearLayout>
+			<Button
+				android:id="@+id/resend_code"
+				android:layout_width="120dp"
+				android:layout_height="35dp"
+				android:layout_marginEnd="12dp"
+				android:layout_marginBottom="8dp"
+				android:background="@color/blue"
+				android:minWidth="0dp"
+				android:minHeight="0dp"
+				android:text="@string/resend_code_button"
+				android:textAllCaps="false"
+				android:textStyle="normal" />
+
+
+			<Button
+				android:id="@+id/call_me"
+				android:layout_width="120dp"
+				android:layout_height="35dp"
+				android:layout_marginStart="12dp"
+				android:layout_marginBottom="8dp"
+				android:background="@color/blue"
+				android:minWidth="0dp"
+				android:minHeight="0dp"
+				android:text="@string/call_me_button"
+				android:textAllCaps="false"
+				android:textStyle="normal" />
+
+
+		</LinearLayout>
+
+			<Button
+				android:id="@+id/next"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_horizontal"
+				android:layout_marginTop="48dp"
+				android:text="@string/next" />
+
+		</LinearLayout>
+
 
 </ScrollView>
