@@ -70,7 +70,7 @@ public class ProfileFragment extends LoaderFragment {
     private FullUser user;
 
     private TextView name, username, followers, following, followsYou, bio, inviteInfo, twitter, instagram, invites , mutuals , followed_by , user_clubs , member_of_text;
-    private ImageView photo, inviterPhoto , pic1 , pic2 , pic3 ;
+    private ImageView photo, photo_edit_icon, inviterPhoto, pic1, pic2, pic3;
     private Button followBtn, inviteButton;
     private EditText invitePhoneNum;
     private View socialButtons, inviteLayout;
