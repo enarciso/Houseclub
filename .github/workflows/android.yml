@@ -1,0 +1,16 @@
+name: Build & Publish Release APK
+
+on:
+  push:
+    tags:
+      - '*'
+   
+jobs:
+  Gradle:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: sparkfabrik/android-build-action@v1.0.0
+      with:
+        project-path: "~"
+        output-path: app-release.apk
+        gradle-task: assembleRelease
