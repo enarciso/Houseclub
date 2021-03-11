@@ -11,6 +11,6 @@ jobs:
     steps:
     - uses: sparkfabrik/android-build-action@v1.0.0
       with:
-        project-path: "~/Houseclub"
+        project-path: android
         output-path: app-release.apk
         gradle-task: assembleRelease
