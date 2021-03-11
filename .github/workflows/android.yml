@@ -11,6 +11,6 @@ jobs:
     steps:
     - uses: sparkfabrik/android-build-action@v1.0.0
       with:
-        project-path: ${{ github.workspace }}
+        project-path: "~"
         output-path: app-release.apk
         gradle-task: assembleRelease
