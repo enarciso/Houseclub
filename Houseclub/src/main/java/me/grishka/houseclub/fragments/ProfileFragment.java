@@ -606,7 +606,7 @@ public class ProfileFragment extends LoaderFragment {
         if (user.photoUrl != null) {
 
             Dialog photoDialog = new Dialog(this.getActivity());
-            photoDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+            // photoDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
             ImageView photo = new ImageView(this.getContext());
             ColorDrawable d = new ColorDrawable(getResources().getColor(R.color.grey));
