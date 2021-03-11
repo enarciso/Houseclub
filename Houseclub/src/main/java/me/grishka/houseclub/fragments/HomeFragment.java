@@ -219,24 +219,42 @@ public class HomeFragment extends BaseRecyclerFragment<Channel> {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Bundle args = new Bundle();
-        args.putInt("id", Integer.parseInt(ClubhouseSession.userID));
-
-
         if (item.getItemId() == R.id.homeMenuProfile) {
-            Nav.go(getActivity(), ProfileFragment.class, args);
-        } else if (item.getItemId() == R.id.homeMenuSearchPeople) {
-            args.putInt(BaseSearchFragment.KEY_SEARCH_TYPE, BaseSearchFragment.SearchType.PEOPLE.ordinal());
-            Nav.go(getActivity(), SearchPeopleFragment.class, args);
-        } else if (item.getItemId() == R.id.homeMenuNotification) {
-            Nav.go(getActivity(), NotificationListFragment.class, args);
-        } else if (item.getItemId() == R.id.homeMenuAbout) {
+			Bundle args = new Bundle();
+			args.putInt("id", Integer.parseInt(ClubhouseSession.userID));
+			Nav.go(getActivity(), ProfileFragment.class, args);
+			return true;
+		}
+		else if (item.getItemId() == R.id.homeMenuSearchPeople) {
+			Bundle args = new Bundle();
+			Nav.go(getActivity(), SearchListFragment.class, args);
+			return true;
+		}
+		else if (item.getItemId() == R.id.homeMenuNotifications) {
+			Bundle args = new Bundle();
+			args.putInt("id", Integer.parseInt(ClubhouseSession.userID));
+			Nav.go(getActivity(), NotificationListFragment.class, args);
+			return true;
+		}
+		else if (item.getItemId() == R.id.homeMenuEvents) {
+			Bundle args = new Bundle();
+			args.putInt("id", Integer.parseInt(ClubhouseSession.userID));
+			Nav.go(getActivity(), EventsFragment.class, args);
+			return true;
+		}
+		else if (item.getItemId() == R.id.homeMenuSearchClubs) {
+			Bundle args = new Bundle();
+			args.putInt("id", Integer.parseInt(ClubhouseSession.userID));
+			Nav.go(getActivity(), SearchClubsListFragment.class, args);
+			return true;
+		}
+        else if (item.getItemId() == R.id.homeMenuAbout) {
             about();
-        } else if (item.getItemId() == R.id.homeMenuLogout) {
+        }
+        else if (item.getItemId() == R.id.homeMenuLogout) {
             logOut();
         }
-        return true;
-
+		return super.onOptionsItemSelected(item);
     }
 
     private class ChannelAdapter extends RecyclerView.Adapter<ChannelViewHolder> implements ImageLoaderRecyclerAdapter {
@@ -305,6 +323,7 @@ public class HomeFragment extends BaseRecyclerFragment<Channel> {
 
             itemView.setOutlineProvider(roundedCornersOutline);
             itemView.setClipToOutline(true);
+            itemView.setElevation(V.dp(2));
             itemView.setOnClickListener(this);
         }
 
@@ -356,221 +375,4 @@ public class HomeFragment extends BaseRecyclerFragment<Channel> {
                 .setCancelable(false)
                 .show();
     }
-
-
-public class HomeFragment extends BaseRecyclerFragment<Channel> {
-
-	private ChannelAdapter adapter;
-	private ViewOutlineProvider roundedCornersOutline=new ViewOutlineProvider() {
-		@Override
-		public void getOutline(View view, Outline outline) {
-			outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), V.dp(8));
-		}
-	};
-
-	public HomeFragment() {
-		super(20);
-	}
-
-	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		loadData();
-		setHasOptionsMenu(true);
-	}
-
-	@Override
-	protected void doLoadData(int offset, int count) {
-		currentRequest=new GetChannels()
-				.setCallback(new SimpleCallback<GetChannels.Response>(this) {
-					@Override
-					public void onSuccess(GetChannels.Response result) {
-						currentRequest=null;
-						onDataLoaded(result.channels, false);
-					}
-				}).exec();
-	}
-
-	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-		list.addItemDecoration(new RecyclerView.ItemDecoration() {
-			@Override
-			public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
-				outRect.bottom=outRect.top=V.dp(8);
-				outRect.left=outRect.right=V.dp(16);
-			}
-		});
-		getToolbar().setElevation(0);
-	}
-
-	@Override
-	public void onConfigurationChanged(Configuration newConfig) {
-		super.onConfigurationChanged(newConfig);
-		getToolbar().setElevation(0);
-	}
-
-	@Override
-	protected RecyclerView.Adapter getAdapter() {
-		if(adapter==null) {
-			adapter=new ChannelAdapter();
-			adapter.setHasStableIds(true);
-		}
-		return adapter;
-	}
-
-	@Override
-	public boolean wantsLightNavigationBar() {
-		return true;
-	}
-
-	@Override
-	public boolean wantsLightStatusBar() {
-		return true;
-	}
-
-	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		inflater.inflate(R.menu.menu_home, menu);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == R.id.homeMenuProfile) {
-			Bundle args=new Bundle();
-			args.putInt("id", Integer.parseInt(ClubhouseSession.userID));
-			Nav.go(getActivity(), ProfileFragment.class, args);
-			return true;
-		}
-		else if (item.getItemId() == R.id.homeMenuSearchPeople) {
-			Bundle args = new Bundle();
-			Nav.go(getActivity(), SearchListFragment.class, args);
-			return true;
-		}
-		else if (item.getItemId() == R.id.homeMenuNotifications) {
-			Bundle args = new Bundle();
-			args.putInt("id", Integer.parseInt(ClubhouseSession.userID));
-			Nav.go(getActivity(), NotificationListFragment.class, args);
-			return true;
-		}
-		else if (item.getItemId() == R.id.homeMenuEvents) {
-			Bundle args = new Bundle();
-			args.putInt("id", Integer.parseInt(ClubhouseSession.userID));
-			Nav.go(getActivity(), EventsFragment.class, args);
-			return true;
-		}
-
-		else if (item.getItemId() == R.id.homeMenuSearchClubs) {
-			Bundle args = new Bundle();
-			args.putInt("id", Integer.parseInt(ClubhouseSession.userID));
-			Nav.go(getActivity(), SearchClubsListFragment.class, args);
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-
-	}
-
-	private class ChannelAdapter extends RecyclerView.Adapter<ChannelViewHolder> implements ImageLoaderRecyclerAdapter {
-
-		@NonNull
-		@Override
-		public ChannelViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-			return new ChannelViewHolder();
-		}
-
-		@Override
-		public void onBindViewHolder(@NonNull ChannelViewHolder holder, int position) {
-			holder.bind(data.get(position));
-		}
-
-		@Override
-		public int getItemCount() {
-			return data.size();
-		}
-
-		@Override
-		public long getItemId(int position) {
-			return data.get(position).channelId;
-		}
-
-		@Override
-		public int getImageCountForItem(int position) {
-			Channel chan=data.get(position);
-			int count=0;
-			for(int i=0;i<Math.min(2, chan.users.size());i++) {
-				if(chan.users.get(i).photoUrl!=null)
-					count++;
-			}
-			return count;
-		}
-
-		@Override
-		public String getImageURL(int position, int image) {
-			Channel chan=data.get(position);
-			for(int i=0;i<Math.min(2, chan.users.size());i++) {
-				if(chan.users.get(i).photoUrl!=null) {
-					if(image==0)
-						return chan.users.get(i).photoUrl;
-					else
-						image--;
-				}
-			}
-			return null;
-		}
-	}
-
-	private class ChannelViewHolder extends BindableViewHolder<Channel> implements View.OnClickListener, ImageLoaderViewHolder {
-
-		private TextView topic, speakers, numMembers, numSpeakers;
-		private ImageView pic1, pic2;
-		private Drawable placeholder=new ColorDrawable(getResources().getColor(R.color.grey));
-
-		public ChannelViewHolder() {
-			super(getActivity(), R.layout.channel_row);
-			topic=findViewById(R.id.topic);
-			speakers=findViewById(R.id.speakers);
-			numSpeakers=findViewById(R.id.num_speakers);
-			numMembers=findViewById(R.id.num_members);
-			pic1=findViewById(R.id.pic1);
-			pic2=findViewById(R.id.pic2);
-
-			itemView.setOutlineProvider(roundedCornersOutline);
-			itemView.setClipToOutline(true);
-			itemView.setElevation(V.dp(2));
-			itemView.setOnClickListener(this);
-		}
-
-		@Override
-		public void onBind(Channel item) {
-			topic.setText(item.topic);
-			numMembers.setText(""+item.numAll);
-			numSpeakers.setText(""+item.numSpeakers);
-			speakers.setText(item.users.stream().map(user->user.isSpeaker ? (user.name+" 💬") : user.name).collect(Collectors.joining("\n")) );
-
-			imgLoader.bindViewHolder(adapter, this, getAdapterPosition());
-		}
-
-		@Override
-		public void onClick(View view) {
-			((MainActivity)getActivity()).joinChannel(item);
-		}
-
-		private ImageView imgForIndex(int index) {
-			if(index==0)
-				return pic1;
-			return pic2;
-		}
-
-		@Override
-		public void setImage(int index, Bitmap bitmap) {
-			if(index==0 && item.users.get(0).photoUrl==null)
-				index=1;
-			imgForIndex(index).setImageBitmap(bitmap);
-		}
-
-		@Override
-		public void clearImage(int index) {
-			imgForIndex(index).setImageDrawable(placeholder);
-		}
-	}
 }
