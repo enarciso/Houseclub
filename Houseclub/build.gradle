@@ -7,7 +7,7 @@ android {
         applicationId "me.grishka.houseclub"
         minSdkVersion 24
         versionCode 10
-        versionName "1.0.10"
+        versionName "1.0.11"
         resConfig "en"
         vectorDrawables.useSupportLibrary = true
         Properties properties = new Properties()
