@@ -4,6 +4,7 @@ import me.grishka.houseclub.api.BaseResponse;
 import me.grishka.houseclub.api.ClubhouseAPIRequest;
 
 public class AudienceReply extends ClubhouseAPIRequest<BaseResponse> {
+    
     public AudienceReply(String channel, boolean raise) {
         super("POST", "audience_reply", BaseResponse.class);
         requestBody = new Body(channel, raise, !raise);
